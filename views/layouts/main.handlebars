@@ -12,22 +12,28 @@
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/dashboard">Dashboard</a></li>
-          <li><a href="/signup">Signup</a></li>
-          <li><a href="/logout">Logout</a></li>
+          {{#if isLogged}}
+            <li><button id="logout">Logout</button></li>
+          {{else}}
+            <li><a href="/signup">Login</a></li>
+          {{/if}}
         </ul>
       </nav>
       <h1>The Tech Blog</h1>
     </header>
 
     <main>
-        <div class="message">
-            <p></p>
-        </div>
-        {{{ body }}}
+      <div class="message">
+        <p></p>
+      </div>
+      {{{body}}}
     </main>
     <footer>
 
     </footer>
     <script src="/js/script.js"></script>
+    {{#if isLogged}}
+      <script src="/js/logout.js"></script>
+    {{/if}}
   </body>
 </html>

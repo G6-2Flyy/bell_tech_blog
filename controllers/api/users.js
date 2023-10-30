@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {User} = require('../../models');
-const bcrypt = require('bcrypt');
+
 
 router.post('/', async (req, res) => {
     try {
@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     try {
-        const foundUser = User.findOne({
+        const foundUser = await User.findOne({
             where: {
                 username: req.body.username,
             }
@@ -30,8 +30,7 @@ router.post('/login', async (req, res) => {
             return
         }
 
-        console.log(await Object.keys(foundUser))
-        const isValid = await bcrypt.compareSync(req.body.password, foundUser.dataValues.password)
+        const isValid = await foundUser.validatePassword(req.body.password)
         if (!isValid) {
             res.status(400).json({message: 'Invalid password!'})
             return
@@ -50,5 +49,18 @@ router.post('/login', async (req, res) => {
     }
 })
 
+router.post('/logout', async (req, res) => {
+    try {
+        if (req.session.isLogged) {
+            req.session.destroy(() => {
+                return res.status(204).end()
+            })
+        }
+       res.status(204).end()
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({message: 'Internal server error'})
+    }
+})
 
 module.exports = router;
