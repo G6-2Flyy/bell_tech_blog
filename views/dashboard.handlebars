@@ -1,3 +1,5 @@
-<h1>Welcome to the dashboard!</h1>
-
+<h1>Welcome {{user.username}} to the dashboard!</h1>
+{{#each user.posts as |post|}}
+  {{> blog post}}
+  {{/each}}
 <a href="/dashboard/new">Create a Post</a>
