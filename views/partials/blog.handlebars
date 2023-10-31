@@ -1,7 +1,12 @@
 <article>
-    <h2>
+   <header>
+     <h2>
         <a href="/posts/{{id}}">{{title}}</a>
     </h2>
+    <h5>
+        Posted by {{user.username}} on {{formatDate created_at}}
+    </h5>
+   </header>
     <p>
         {{content}}
     </p>

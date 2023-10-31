@@ -1,3 +1,12 @@
-<h1>{{post.title}}</h1>
-<p>{{post.content}}</p>
-<p>{{post.user.username}}</p>
+<div class="post-detail">
+    {{>blog post}}
+
+    <div class="comments-container">
+        <form id="comment-form">
+            <input type="text" id="comment">
+            <input type="text" id="post" hidden value="{{post.id}}">
+            <button type="submit">Submit</button>
+        </form>
+        {{>comment}}
+    </div>
+</div>
