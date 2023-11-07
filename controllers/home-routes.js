@@ -39,7 +39,7 @@ router.get('/signup', (req, res) => {
 router.get('/posts/:id', async (req, res) => {
     try {
         const dbData = await Post.findByPk(req.params.id, {
-            attributes: ['id', 'title', 'content', 'created_at'],
+            attributes: ['id', 'title', 'content', 'created_at', 'user_id'],
             include: [
                 {
                     model: User,
@@ -61,10 +61,11 @@ router.get('/posts/:id', async (req, res) => {
         const post = dbData.get({
             plain: true
         })
-        console.log(post)
+      
         res.render('singlepost', {
             isLogged: req.session.isLogged,
-            post
+            post, 
+            isOwner: post.user_id === req.session.user_id
         })
     
     } catch (error) {

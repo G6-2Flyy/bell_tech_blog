@@ -1,5 +1,8 @@
-<h1>Welcome {{user.username}} to the dashboard!</h1>
-{{#each user.posts as |post|}}
+<h1 class="text-3xl font-bold mb-4">Welcome {{user.username}} to the dashboard!</h1>
+<a class="py-2 px-7 bg-zinc-950 rounded-2xl text-green-400" href="/dashboard/new">Create a Post</a>
+<div class="mt-4">
+  {{#each user.posts as |post|}}
   {{> blog post}}
   {{/each}}
-<a href="/dashboard/new">Create a Post</a>
+</div>
+

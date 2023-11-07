@@ -1,12 +1,21 @@
 <div class="post-detail">
     {{>blog post}}
-
     <div class="comments-container">
-        <form id="comment-form">
-            <input type="text" id="comment">
+        <form id="comment-form" class="px-4 w-fit">
+            <input class="p-2 text-base w-96" type="text" id="comment">
             <input type="text" id="post" hidden value="{{post.id}}">
-            <button type="submit">Submit</button>
+            <button class="bg-zinc-950 text-green-400 p-2" type="submit">Submit</button>
         </form>
-        {{>comment}}
+        {{#each post.comments as |com|}}
+        {{>comment com}}
+        {{/each}}
     </div>
+    {{#if isOwner}}
+    <div class="post-actions">
+        <a href="/dashboard/edit/{{post.id}}">Edit</a>
+        <button data-id={{post.id}} id="delete">Delete</button>
+    </div>
+    {{/if}}
 </div>
+<script src="/js/delete.js"></script>
+<script src="/js/comment.js"></script>

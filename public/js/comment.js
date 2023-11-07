@@ -12,14 +12,14 @@ async function newComment(event) {
 
     try {
         const response = await fetch('/api/comments', {
-            method: 'post',
+            method: 'POST',
             body: JSON.stringify({comment, post_id}),
             headers: {
                 "Content-Type": "application/json"
             }
         })
         if (response.ok) {
-            // window.location.replace('/posts/' + post_id)
+            window.location.reload()
             console.log(response)
         } else {
             console.log(response)
