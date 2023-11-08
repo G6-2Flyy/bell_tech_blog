@@ -1,14 +1,14 @@
 <div class="post-detail">
     {{>blog post}}
     <div class="comments-container">
+        {{#each post.comments as |com|}}
+        {{>comment com}}
+        {{/each}}
         <form id="comment-form" class="px-4 w-fit">
             <input placeholder="Add a comment" class="p-2 text-base w-96" type="text" id="comment">
             <input type="text" id="post" hidden value="{{post.id}}">
             <button class="bg-zinc-950 text-green-400 p-2" type="submit">Submit</button>
         </form>
-        {{#each post.comments as |com|}}
-        {{>comment com}}
-        {{/each}}
     </div>
     {{#if isOwner}}
     <div class="post-actions">
